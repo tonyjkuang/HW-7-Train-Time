@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Anytime Train Time</title>
+	<meta charset="UTF-8">
+  	<meta name="viewport" content="width=device-width, inital-scale=1">
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/flatly/bootstrap.min.css">
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<div class="container">
+		<div class="jumbotron" style="background-color: #20315A ; color: white;">
+      		<h1 class="text-center"><strong><i class="fa fa-heart-o"></i> Anytime is Train Time</strong></h1>
+    	</div>
+
+	    <div class="row">
+	      <div class="col-sm-12">
+	        <div class="panel panel-primary">
+	          <div class="panel-heading">
+	            <h3 class="panel-title"><strong><i class="fa fa-table"></i>   Current Train Schedule</strong></h3>
+	          </div>
+	          <br>
+	      		<table class="table">
+			      <thead>
+			        <tr>
+			          <th>Train Name</th>
+			          <th>Destination</th>
+			          <th>Frequency</th>
+			          <th>Next Arrival</th>
+			          <th>Minutes Away</th>
+			        </tr>
+			      </thead>
+			      <tbody>
+			        <tr>
+			          <!-- Example Movie 1 -->
+			          <td></td>
+			          <td></td>
+			          <td></td>
+			        </tr>
+			        <tr>
+			          <!-- Example Movie 2 -->
+			          <td></td>
+			          <td></td>
+			          <td></td>
+			        </tr>
+			        <tr>
+			          <!-- Example Movie 3 -->
+			          <td></td>
+			          <td></td>
+			          <td></td>
+			        </tr>
+			      </tbody>
+		    	</table>
+	          	
+	          
+				
+	          <!-- This main panel will hold each of the resulting train schedule -->
+	          <div class="panel-body" id="well-section">
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+
+	    <div class="row">
+	      <div class="col-sm-12">
+	        <br>
+	        <div class="panel panel-primary">
+	          <div class="panel-heading">
+	            <h3 class="panel-title"><strong><i class="fa  fa-list-alt"></i> Add Train</strong></h3>
+	          </div>
+	          <div class="panel-body">
+	            <form role="form">
+	              <div class="form-group">
+	                <label for="train-name">Train Name</label>
+	                <input type="text" class="form-control" id="train-name">
+	              </div>
+
+	              <div class="form-group">
+	                <label for="destination">Destination</label>
+	                <input type="text" class="form-control" id="destination">
+	              </div>
+
+	              <div class="form-group">
+	                <label for="first-train-time">First Train Time</label>
+	                <input type="text" class="form-control" id="first-train-time">
+	              </div>
+
+	              <div class="form-group">
+	                <label for="frequency">Frequency (min)</label>
+	                <input type="text" class="form-control" id="frequency">
+	              </div>
+
+	              <button type="submit" class="btn btn-default" id="submit"><i class="fa fa-search"></i> Submit</button>
+	            </form>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+
+	    <div class="row">
+	      <div class="col-sm-12">
+	        <hr>
+	        <h5 class="text-center"><small>Copyright &copy; 2017 Tony Kuang</small></h5>
+	      </div>
+	    </div>
+
+	</div>
+
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+	<script type="text/javascript" src="logic.js"></script>
+</body>
+</html>
