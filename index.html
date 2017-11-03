@@ -32,33 +32,11 @@
 			          <th>Minutes Away</th>
 			        </tr>
 			      </thead>
-			      <tbody>
-			        <tr>
-			          <!-- Example Movie 1 -->
-			          <td></td>
-			          <td></td>
-			          <td></td>
-			        </tr>
-			        <tr>
-			          <!-- Example Movie 2 -->
-			          <td></td>
-			          <td></td>
-			          <td></td>
-			        </tr>
-			        <tr>
-			          <!-- Example Movie 3 -->
-			          <td></td>
-			          <td></td>
-			          <td></td>
-			        </tr>
+			      <tbody id="add-train">
+
 			      </tbody>
 		    	</table>
 	          	
-	          
-				
-	          <!-- This main panel will hold each of the resulting train schedule -->
-	          <div class="panel-body" id="well-section">
-	          </div>
 	        </div>
 	      </div>
 	    </div>
@@ -83,7 +61,7 @@
 	              </div>
 
 	              <div class="form-group">
-	                <label for="first-train-time">First Train Time</label>
+	                <label for="first-train-time">First Train Time (HH:mm - military time)</label>
 	                <input type="text" class="form-control" id="first-train-time">
 	              </div>
 
@@ -111,5 +89,6 @@
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
 	<script type="text/javascript" src="logic.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js" integrity="sha256-zG8v+NWiZxmjNi+CvUYnZwKtHzFtdO8cAKUIdB8+U9I=" crossorigin="anonymous"></script>
 </body>
 </html>

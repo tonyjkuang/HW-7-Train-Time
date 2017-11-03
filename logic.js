@@ -12,11 +12,10 @@ firebase.initializeApp(config);
 // Create a variable to reference the database
 var database = firebase.database();
 
-// Set variables
-var train = "";
-var destination = "";
-var trainTime = "";
-var frequency = "";
+var train;
+var destination;
+var trainTime;
+var frequency;
 
 // Search Button changes what is stored in firebase
 $("#submit").on("click", function() {
@@ -29,34 +28,90 @@ $("#submit").on("click", function() {
   trainTime = $("#first-train-time").val().trim();
   frequency = $("#frequency").val().trim();
 
-  //var trainName = $("<p>");
-  //var trainDestination = $("<p>");
-  //var firstTrainTime = $("<p>");
-  //var trainFrequency = $("<p>")
+  // Check if the input is valid
+  if (train === "" || destination === "" || trainTime === "" || frequency === "") {
+    alert("Please fill in all fields.");
+  } else {
+    database.ref().push({
+      train: train,
+      destination: destination,
+      trainTime: trainTime,
+      frequency: frequency
+    });
 
-  // Change what is saved in firebase
-  database.ref().set({
-    train: train,
-    destination: destination,
-    trainTime: trainTime,
-    frequency: frequency
-  });
+      // Clear the fields
+      $("#train-name").val("");
+      $("#destination").val("");
+      $("#first-train-time").val("");
+      $("#frequency").val("");
+  }
 });
 
+function createTrain(train, destination, frequency, trainTime) {
+  var addRow = $("<tr>"); // Create a row for each train
+  var addTrain = $("<td>").text(train);
+  var addDestination = $("<td>").text(destination);
+  var addFrequency = $("<td>").text(frequency);
+  var nextArrival = calNextArrival();
+  var convertNextArrival = moment(calNextArrival()).format("HH:mm");
+  var tArrival = $("<td>").text(convertNextArrival);
+  //var minsAway = calMinsAway();
+  //var tMinsAway = $("<td>").text(minsAway);
+
+  addRow.append(addTrain);
+  addRow.append(addDestination);
+  addRow.append(addFrequency);
+  addRow.append(tArrival);
+  //addRow.append(tMinsAway);
+  $("#add-train").append(addRow);
+}
+
+
+function calNextArrival() {
+  var firstDeparture = moment(trainTime, "HH:mm");
+  var currentTime = moment();
+  var currentInterval = moment(firstDeparture);
+  var nextTrain;
+  var counter = 0;
+    // Assume there is no next train to start with
+    while(!nextTrain && counter < 500) {
+      
+      console.log('Train Arrival :: ', currentInterval.format("HH:mm"))
+
+      // Define the situation where first train time is after current time
+      if (firstDeparture.isAfter(currentTime)) {
+        console.log('train has not left yet.')
+      }
+      
+      if ( currentInterval.isAfter(currentTime) ) {
+        // Shows next train departure time
+        nextTrain = currentInterval
+        
+      } else {
+        // Shows all previous departure time
+        currentInterval.add(frequency, 'minutes')
+
+      }
+      counter++
+    }
+    return nextTrain
+
+}
+
+// Calculate the time between current time and next arrival
+/*function calMinsAway() {
+  var nTrain = moment(createTrain(trainTime)).format("HH:mm");
+  console.log(nTrain)
+  var now = moment().format("HH:mm");
+  var timeUntil = moment(nTrain).diff(now);
+  return timeUntil;
+};*/
+
+
 // When changes occurs it will print them to console and html
-database.ref().on("value", function(snapshot) {
-
-  // Print the initial data to the console.
-  console.log(snapshot.val());
-
-  // Log the value of the various properties
-  console.log(snapshot.val().train);
-  console.log(snapshot.val().destination);
-  console.log(snapshot.val().trainTime);
-  console.log(snapshot.val().frequency);
-
+database.ref().on("child_added", function(snapshot) {
   // Change the HTML
-  $("#well-section").text(snapshot.val().train + " | " + snapshot.val().destination + " | " + snapshot.val().trainTime);
+  createTrain(snapshot.val().train, snapshot.val().destination, snapshot.val().frequency, snapshot.val().trainTime);
 
   // If any errors are experienced, log them to console.
 }, function(errorObject) {
